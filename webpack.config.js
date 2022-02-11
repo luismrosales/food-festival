@@ -1,9 +1,9 @@
-const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const path = require("path");
 const webpack = require("webpack");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
-module.exports = {
+const path = require("path");
+
+const config = {
   entry: {
     app: "./assets/js/script.js",
     events: "./assets/js/events.js",
@@ -12,12 +12,12 @@ module.exports = {
   },
   output: {
     filename: "[name].bundle.js",
-    path: __dirname + "/dist",
+    path: `${__dirname}/dist`,
   },
   module: {
     rules: [
       {
-        test: /\.jpg$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
             loader: "file-loader",
@@ -26,8 +26,8 @@ module.exports = {
               name(file) {
                 return "[path][name].[ext]";
               },
-              publicPath: function (url) {
-                return url.replace("../", "/assets");
+              publicPath(url) {
+                return url.replace("../", "/assets/");
               },
             },
           },
@@ -44,8 +44,10 @@ module.exports = {
       jQuery: "jquery",
     }),
     new BundleAnalyzerPlugin({
-      analyzerMode: "static", // the report outputs to an html file in the dist folder
+      analyzerMode: "static",
     }),
   ],
   mode: "development",
 };
+
+module.exports = config;

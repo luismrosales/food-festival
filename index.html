@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Food Festival</title>
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -12,7 +12,7 @@
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
-    <script src="./dist//main.bundle.js"></script>
+    <script src="./dist/app.bundle.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -234,4 +234,16 @@
       </div>
     </footer>
   </body>
+  <script>
+    (function () {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then(() => console.log("Service Worker registered successfully."))
+          .catch((error) =>
+            console.log("Service Worker registration failed:", error)
+          );
+      }
+    })();
+  </script>
 </html>
